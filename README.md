@@ -4,11 +4,11 @@
 Виявляє об'єкти на робочій поверхні за допомогою сенсора Kinect v1 та публікує
 результати в ROS 2.
 
-Реалізовано на ROS 2 Jazzy та Python 3.12. Обробка зображень — OpenCV 4.6 і
+Реалізовано на ROS 2 Jazzy та Python 3.12. Обробка зображень - OpenCV 4.6 і
 Open3D 0.19, робота з Kinect v1 - через libfreenect.
 
 Репозиторій містить три пакети: `cv_interfaces` з визначенням повідомлення
-`Detection.msg`, `cv_webcam_demo` з власне вузлом детектора та `kinect_ros2` —
+`Detection.msg`, `cv_webcam_demo` з власне вузлом детектора та `kinect_ros2` -
 драйвер Kinect v1 для ROS 2.
 
 ## Збірка та запуск
