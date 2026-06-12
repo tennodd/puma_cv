@@ -1,41 +1,39 @@
 # puma_cv
 
-Visual recognition subsystem for the PUMA 560 robotic manipulator team project. Built on Kinect v1.
+Підсистема технічного зору для робота-маніпулятора PUMA 560 (командний проєкт).
+Виявляє об'єкти на робочій поверхні за допомогою сенсора Kinect v1 та публікує
+результати в ROS 2.
 
-## Stack
+Реалізовано на ROS 2 Jazzy та Python 3.12. Обробка зображень — OpenCV 4.6 і
+Open3D 0.19, робота з Kinect v1 - через libfreenect.
 
-- ROS 2 Jazzy
-- Python 3.12
-- OpenCV 4.6, Open3D 0.19, NumPy 1.26
-- Kinect v1 via libfreenect
+Репозиторій містить три пакети: `cv_interfaces` з визначенням повідомлення
+`Detection.msg`, `cv_webcam_demo` з власне вузлом детектора та `kinect_ros2` —
+драйвер Kinect v1 для ROS 2.
 
-## Packages
+## Збірка та запуск
 
-- `cv_interfaces/` — message definitions (`Detection.msg`)
-- `cv_webcam_demo/` — detector node
-- `kinect_ros2/` — Kinect v1 driver
-
-## Quick start
-
-Place all three packages into the `src/` of a ROS 2 workspace, then:
+Усі три пакети потрібно розмістити в каталозі `src/` робочого простору ROS 2,
+після чого:
 
 ```bash
-# Install Open3D
+# Встановлення Open3D
 bash setup_container_deps.sh
 
-# Build
+# Збірка
 colcon build --packages-select cv_interfaces cv_webcam_demo kinect_ros2 --symlink-install
 source install/setup.bash
 
-# Launch
+# Запуск
 ros2 launch cv_webcam_demo webcam_cv.launch.py
 ```
 
-## Output
+Результати детекції публікуються в топік `/detections` (тип
+`cv_interfaces/msg/Detection`).
 
-Topic: `/detections`
-Type: `cv_interfaces/msg/Detection`
+## Налаштування
 
-## Tuning
-
-All detector parameters are exposed via ROS dynamic reconfigure. Use `rqt_reconfigure` or `ros2 param set` for live tuning. Use `rqt` to watch image streams in real time
+Усі параметри детектора доступні для зміни під час роботи через стандартний
+механізм параметрів ROS 2 - зручніше за все через `rqt_reconfigure` або
+`ros2 param set`. Для перегляду відеопотоків у реальному часі можна
+скористатися `rqt`.
